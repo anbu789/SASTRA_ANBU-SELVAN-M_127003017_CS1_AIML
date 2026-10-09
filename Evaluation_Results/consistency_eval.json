@@ -1,0 +1,22 @@
+{
+  "detected": {
+    "ISS-01": true,
+    "ISS-02": true,
+    "ISS-03": true,
+    "ISS-04": true,
+    "ISS-05": true,
+    "ISS-06": true
+  },
+  "recall": 1.0,
+  "precision": 1.0,
+  "false_positives": [],
+  "v11_still_present": {
+    "ISS-01": false,
+    "ISS-02": true,
+    "ISS-03": true,
+    "ISS-04": true,
+    "ISS-05": true,
+    "ISS-06": true
+  },
+  "v11_behaves_as_expected": true
+}

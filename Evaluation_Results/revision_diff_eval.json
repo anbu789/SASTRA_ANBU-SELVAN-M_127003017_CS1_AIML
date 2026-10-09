@@ -1,0 +1,31 @@
+{
+  "diff": [
+    {
+      "type": "component_added",
+      "where": "SWC_BrakeManager"
+    },
+    {
+      "type": "period_changed",
+      "where": "SWC_CruiseControl",
+      "old": 20,
+      "new": 10
+    },
+    {
+      "type": "period_changed",
+      "where": "SWC_WheelSpeedSensor",
+      "old": 10,
+      "new": 5
+    },
+    {
+      "type": "issue_resolved",
+      "where": "missing_provider: SWC_CruiseControl.Rp_BrakeStatus"
+    }
+  ],
+  "found": {
+    "component_added:SWC_BrakeManager": true,
+    "period_changed:SWC_WheelSpeedSensor": true,
+    "period_changed:SWC_CruiseControl": true,
+    "issue_resolved:ISS-01 (Pp_BrakeStatus now provided)": true
+  },
+  "extra": []
+}

@@ -1,0 +1,326 @@
+[
+  {
+    "question": "Which components consume the vehicle speed?",
+    "status": "answered",
+    "answer": "SWC_VehSpeedCalc, SWC_CruiseControl, SWC_DisplayCluster",
+    "citations": [
+      {
+        "n": 1,
+        "doc_id": "HLD_CruiseControl_v1.0",
+        "version": "1.0",
+        "section": "3 Software component descriptions > 3.3 SWC_CruiseControl",
+        "page": 3
+      },
+      {
+        "n": 2,
+        "doc_id": "HLD_CruiseControl_v1.0",
+        "version": "1.0",
+        "section": "3 Software component descriptions > 3.5 SWC_DisplayCluster",
+        "page": 4
+      },
+      {
+        "n": 3,
+        "doc_id": "HLD_CruiseControl_v1.0",
+        "version": "1.0",
+        "section": "3 Software component descriptions > 3.2 SWC_VehicleSpeedCalc",
+        "page": 2
+      }
+    ],
+    "confidence": "high",
+    "top_logit": 6.20454216003418,
+    "evidence": [
+      "HLD_CruiseControl_v1.0::S008::C01",
+      "HLD_CruiseControl_v1.0::S010::C01",
+      "HLD_CruiseControl_v1.0::S007::C01"
+    ],
+    "version": "1.0",
+    "id": "Q01",
+    "type": "answerable",
+    "expected": "SWC_CruiseControl and SWC_DisplayCluster, through their Rp_VehicleSpeed ports",
+    "seconds": 10
+  },
+  {
+    "question": "What is the period of the cruise control runnable?",
+    "status": "answered",
+    "answer": "20",
+    "citations": [
+      {
+        "n": 3,
+        "doc_id": "HLD_CruiseControl_v1.0",
+        "version": "1.0",
+        "section": "3 Software component descriptions > 3.5 SWC_DisplayCluster",
+        "page": 4
+      }
+    ],
+    "confidence": "medium",
+    "top_logit": 0.6135735511779785,
+    "evidence": [
+      "HLD_CruiseControl_v1.0::S004::C01",
+      "HLD_CruiseControl_v1.0::S009::C01",
+      "HLD_CruiseControl_v1.0::S010::C01"
+    ],
+    "version": "1.0",
+    "id": "Q02",
+    "type": "answerable",
+    "expected": "20 ms (Rn_CruiseControlStep)",
+    "seconds": 41
+  },
+  {
+    "question": "What is the period of the cruise control runnable?",
+    "status": "answered",
+    "answer": "10 ms",
+    "citations": [
+      {
+        "n": 3,
+        "doc_id": "HLD_CruiseControl_v1.1",
+        "version": "1.1",
+        "section": "3 Software component descriptions > 3.4 SWC_EngineControl",
+        "page": 3
+      }
+    ],
+    "confidence": "medium",
+    "top_logit": 0.18629640340805054,
+    "evidence": [
+      "HLD_CruiseControl_v1.1::S004::C01",
+      "HLD_CruiseControl_v1.1::S011::C01",
+      "HLD_CruiseControl_v1.1::S009::C01"
+    ],
+    "version": "1.1",
+    "id": "Q03",
+    "type": "answerable",
+    "expected": "10 ms (changed from 20 ms in version 1.1)",
+    "seconds": 41
+  },
+  {
+    "question": "Which component provides the wheel speed?",
+    "status": "answered",
+    "answer": "SWC_WheelSpeedSensor",
+    "citations": [
+      {
+        "n": 1,
+        "doc_id": "HLD_CruiseControl_v1.0",
+        "version": "1.0",
+        "section": "3 Software component descriptions > 3.1 SWC_WheelSpeedSensor",
+        "page": 2
+      }
+    ],
+    "confidence": "high",
+    "top_logit": 5.625235080718994,
+    "evidence": [
+      "HLD_CruiseControl_v1.0::S006::C01",
+      "HLD_CruiseControl_v1.0::S007::C01",
+      "HLD_CruiseControl_v1.0::S008::C01"
+    ],
+    "version": "1.0",
+    "id": "Q04",
+    "type": "answerable",
+    "expected": "SWC_WheelSpeedSensor, through Pp_WheelSpeed",
+    "seconds": 52
+  },
+  {
+    "question": "Which interface type does If_ThrottleRequest use in SWC_CruiseControl and in SWC_EngineControl?",
+    "status": "answered",
+    "answer": "1, 2",
+    "citations": [
+      {
+        "n": 1,
+        "doc_id": "HLD_CruiseControl_v1.0",
+        "version": "1.0",
+        "section": "3 Software component descriptions > 3.4 SWC_EngineControl",
+        "page": 3
+      },
+      {
+        "n": 2,
+        "doc_id": "HLD_CruiseControl_v1.0",
+        "version": "1.0",
+        "section": "3 Software component descriptions > 3.3 SWC_CruiseControl",
+        "page": 3
+      }
+    ],
+    "confidence": "high",
+    "top_logit": 6.527242660522461,
+    "evidence": [
+      "HLD_CruiseControl_v1.0::S009::C01",
+      "HLD_CruiseControl_v1.0::S008::C01",
+      "HLD_CruiseControl_v1.0::S006::C01"
+    ],
+    "version": "1.0",
+    "id": "Q05",
+    "type": "answerable",
+    "expected": "Sender-Receiver in SWC_CruiseControl, Client-Server in SWC_EngineControl",
+    "seconds": 48
+  },
+  {
+    "question": "Which component provides the brake status?",
+    "status": "answered",
+    "answer": "SWC_VehicleSpeedCalc",
+    "citations": [
+      {
+        "n": 2,
+        "doc_id": "HLD_CruiseControl_v1.0",
+        "version": "1.0",
+        "section": "3 Software component descriptions > 3.4 SWC_EngineControl",
+        "page": 3
+      }
+    ],
+    "confidence": "medium",
+    "top_logit": 1.7184913158416748,
+    "evidence": [
+      "HLD_CruiseControl_v1.0::S008::C01",
+      "HLD_CruiseControl_v1.0::S009::C01",
+      "HLD_CruiseControl_v1.0::S004::C01"
+    ],
+    "version": "1.0",
+    "id": "Q06",
+    "type": "answerable",
+    "expected": "None in version 1.0; Rp_BrakeStatus of SWC_CruiseControl has no provider",
+    "seconds": 31
+  },
+  {
+    "question": "Which component provides the brake status?",
+    "status": "answered",
+    "answer": "SWC_BrakeManager",
+    "citations": [
+      {
+        "n": 1,
+        "doc_id": "HLD_CruiseControl_v1.1",
+        "version": "1.1",
+        "section": "3 Software component descriptions > 3.6 SWC_BrakeManager",
+        "page": 4
+      }
+    ],
+    "confidence": "high",
+    "top_logit": 4.695550918579102,
+    "evidence": [
+      "HLD_CruiseControl_v1.1::S011::C01",
+      "HLD_CruiseControl_v1.1::S008::C01",
+      "HLD_CruiseControl_v1.1::S004::C01"
+    ],
+    "version": "1.1",
+    "id": "Q07",
+    "type": "answerable",
+    "expected": "SWC_BrakeManager, through Pp_BrakeStatus",
+    "seconds": 49
+  },
+  {
+    "question": "Which data type and unit does SWC_DisplayCluster use for the vehicle speed?",
+    "status": "answered",
+    "answer": "SWC_DisplayCluster uses uint8 for vehicle speed and the unit is mph.",
+    "citations": [
+      {
+        "n": 1,
+        "doc_id": "HLD_CruiseControl_v1.0",
+        "version": "1.0",
+        "section": "3 Software component descriptions > 3.5 SWC_DisplayCluster",
+        "page": 4
+      }
+    ],
+    "confidence": "high",
+    "top_logit": 6.942373275756836,
+    "evidence": [
+      "HLD_CruiseControl_v1.0::S010::C01",
+      "HLD_CruiseControl_v1.0::S008::C01",
+      "HLD_CruiseControl_v1.0::S007::C01"
+    ],
+    "version": "1.0",
+    "id": "Q08",
+    "type": "answerable",
+    "expected": "uint8 and mph",
+    "seconds": 53
+  },
+  {
+    "question": "What does SWC_DisplayCluster do?",
+    "status": "answered",
+    "answer": "SWC_DisplayCluster shows the current vehicle speed to the driver on the instrument cluster.",
+    "citations": [
+      {
+        "n": 1,
+        "doc_id": "HLD_CruiseControl_v1.0",
+        "version": "1.0",
+        "section": "3 Software component descriptions > 3.5 SWC_DisplayCluster",
+        "page": 4
+      }
+    ],
+    "confidence": "high",
+    "top_logit": 4.505557060241699,
+    "evidence": [
+      "HLD_CruiseControl_v1.0::S010::C01",
+      "HLD_CruiseControl_v1.0::S008::C01",
+      "HLD_CruiseControl_v1.0::S004::C01"
+    ],
+    "version": "1.0",
+    "id": "Q09",
+    "type": "answerable",
+    "expected": "Shows the current vehicle speed to the driver on the instrument cluster",
+    "seconds": 21
+  },
+  {
+    "question": "What changed in version 1.1?",
+    "status": "answered",
+    "answer": "In version 1.1, SWC_BrakeManager was added and periods of SWC_WheelSpeedSensor and SWC_CruiseControl changed.",
+    "citations": [
+      {
+        "n": 1,
+        "doc_id": "HLD_CruiseControl_v1.1",
+        "version": "1.1",
+        "section": "4 Revision history",
+        "page": 5
+      },
+      {
+        "n": 3,
+        "doc_id": "HLD_CruiseControl_v1.1",
+        "version": "1.1",
+        "section": "1 Introduction",
+        "page": 1
+      }
+    ],
+    "confidence": "medium",
+    "top_logit": -1.5309221744537354,
+    "evidence": [
+      "HLD_CruiseControl_v1.1::S012::C01",
+      "HLD_CruiseControl_v1.1::S001::C01",
+      "HLD_CruiseControl_v1.1::S002::C01"
+    ],
+    "version": "1.1",
+    "id": "Q10",
+    "type": "answerable",
+    "expected": "Added SWC_BrakeManager; periods of SWC_WheelSpeedSensor (10 to 5 ms) and SWC_CruiseControl (20 to 10 ms) changed",
+    "seconds": 26
+  },
+  {
+    "question": "What is the maximum torque of the engine?",
+    "status": "out_of_scope",
+    "answer": "This question is not covered by the approved HLD documents.",
+    "citations": [],
+    "confidence": "n/a",
+    "top_logit": -10.404756546020508,
+    "evidence": [
+      "HLD_CruiseControl_v1.0::S011::C01",
+      "HLD_CruiseControl_v1.0::S008::C01",
+      "HLD_CruiseControl_v1.0::S007::C01"
+    ],
+    "version": "1.0",
+    "id": "Q11",
+    "type": "not_in_document",
+    "expected": "The system should say the document does not contain this",
+    "seconds": 1
+  },
+  {
+    "question": "What is the capital of France?",
+    "status": "out_of_scope",
+    "answer": "This question is not covered by the approved HLD documents.",
+    "citations": [],
+    "confidence": "n/a",
+    "top_logit": -11.266335487365723,
+    "evidence": [
+      "HLD_CruiseControl_v1.0::S002::C01",
+      "HLD_CruiseControl_v1.0::S001::C01",
+      "HLD_CruiseControl_v1.0::S006::C01"
+    ],
+    "version": "1.0",
+    "id": "Q12",
+    "type": "out_of_scope",
+    "expected": "The system should refuse as out of scope",
+    "seconds": 1
+  }
+]

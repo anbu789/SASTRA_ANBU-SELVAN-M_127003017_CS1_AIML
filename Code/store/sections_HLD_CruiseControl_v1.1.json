@@ -1,0 +1,309 @@
+{
+ "doc_id": "HLD_CruiseControl_v1.1",
+ "version": "1.1",
+ "pages": 5,
+ "ocr_pages": 0,
+ "sections": [
+  {
+   "section_id": "HLD_CruiseControl_v1.1::S001",
+   "doc_id": "HLD_CruiseControl_v1.1",
+   "version": "1.1",
+   "number": "",
+   "title": "Cruise Control Subsystem - AUTOSAR High-Level Design",
+   "level": 1,
+   "path": [
+    "Cruise Control Subsystem - AUTOSAR High-Level Design"
+   ],
+   "page_start": 1,
+   "page_end": 1,
+   "blocks": [
+    {
+     "kind": "text",
+     "page": 1,
+     "text": "Version 1.1"
+    }
+   ]
+  },
+  {
+   "section_id": "HLD_CruiseControl_v1.1::S002",
+   "doc_id": "HLD_CruiseControl_v1.1",
+   "version": "1.1",
+   "number": "1",
+   "title": "1 Introduction",
+   "level": 1,
+   "path": [
+    "1 Introduction"
+   ],
+   "page_start": 1,
+   "page_end": 1,
+   "blocks": [
+    {
+     "kind": "text",
+     "page": 1,
+     "text": "This document describes the high-level design of the cruise control subsystem on the vehicle ECU. Intended readers are system architects, software developers, integration engineers and test engineers."
+    }
+   ]
+  },
+  {
+   "section_id": "HLD_CruiseControl_v1.1::S003",
+   "doc_id": "HLD_CruiseControl_v1.1",
+   "version": "1.1",
+   "number": "2",
+   "title": "2 Architecture overview",
+   "level": 1,
+   "path": [
+    "2 Architecture overview"
+   ],
+   "page_start": 1,
+   "page_end": 1,
+   "blocks": [
+    {
+     "kind": "text",
+     "page": 1,
+     "text": "The subsystem consists of 6 software components in the application layer. Components communicate through ports typed by port interfaces, connected by the RTE."
+    }
+   ]
+  },
+  {
+   "section_id": "HLD_CruiseControl_v1.1::S004",
+   "doc_id": "HLD_CruiseControl_v1.1",
+   "version": "1.1",
+   "number": "2.1",
+   "title": "2.1 Component catalogue",
+   "level": 2,
+   "path": [
+    "2 Architecture overview",
+    "2.1 Component catalogue"
+   ],
+   "page_start": 1,
+   "page_end": 1,
+   "blocks": [
+    {
+     "kind": "table",
+     "page": 1,
+     "text": "| Component | Kind | Runnable | Period (ms) |\n|---|---|---|---|\n| SWC_WheelSpeedSensor | Sensor-actuator SWC | Rn_ReadWheelSpeed | 5 |\n| SWC_VehicleSpeedCalc | Application SWC | Rn_CalcVehicleSpeed | 10 |\n| SWC_CruiseControl | Application SWC | Rn_CruiseControlStep | 10 |\n| SWC_EngineControl | Application SWC | Rn_ApplyThrottle | 10 |\n| SWC_DisplayCluster | Application SWC | Rn_UpdateDisplay | 100 |\n| SWC_BrakeManager | Sensor-actuator SWC | Rn_ReadBrake | 10 |"
+    }
+   ]
+  },
+  {
+   "section_id": "HLD_CruiseControl_v1.1::S005",
+   "doc_id": "HLD_CruiseControl_v1.1",
+   "version": "1.1",
+   "number": "3",
+   "title": "3 Software component descriptions",
+   "level": 1,
+   "path": [
+    "3 Software component descriptions"
+   ],
+   "page_start": 2,
+   "page_end": 2,
+   "blocks": []
+  },
+  {
+   "section_id": "HLD_CruiseControl_v1.1::S006",
+   "doc_id": "HLD_CruiseControl_v1.1",
+   "version": "1.1",
+   "number": "3.1",
+   "title": "3.1 SWC_WheelSpeedSensor",
+   "level": 2,
+   "path": [
+    "3 Software component descriptions",
+    "3.1 SWC_WheelSpeedSensor"
+   ],
+   "page_start": 2,
+   "page_end": 2,
+   "blocks": [
+    {
+     "kind": "text",
+     "page": 2,
+     "text": "Reads the wheel speed pulses through the ECU abstraction layer and publishes the filtered wheel speed to the application layer."
+    },
+    {
+     "kind": "table",
+     "page": 2,
+     "text": "| Port | Dir | Interface | Interface type | Data element | Data type | Unit |\n|---|---|---|---|---|---|---|\n| Pp_WheelSpeed | P | If_WheelSpeed | Sender-Receiver | wheelSpeed | uint16 | km/h |"
+    },
+    {
+     "kind": "text",
+     "page": 2,
+     "text": "Runnable Rn_ReadWheelSpeed is triggered every 5 ms by a timing event. It writes wheelSpeed through Pp_WheelSpeed."
+    }
+   ]
+  },
+  {
+   "section_id": "HLD_CruiseControl_v1.1::S007",
+   "doc_id": "HLD_CruiseControl_v1.1",
+   "version": "1.1",
+   "number": "3.2",
+   "title": "3.2 SWC_VehicleSpeedCalc",
+   "level": 2,
+   "path": [
+    "3 Software component descriptions",
+    "3.2 SWC_VehicleSpeedCalc"
+   ],
+   "page_start": 2,
+   "page_end": 2,
+   "blocks": [
+    {
+     "kind": "text",
+     "page": 2,
+     "text": "Calculates the vehicle speed and the longitudinal acceleration from the wheel speed and publishes both values."
+    },
+    {
+     "kind": "table",
+     "page": 2,
+     "text": "| Port | Dir | Interface | Interface type | Data element | Data type | Unit |\n|---|---|---|---|---|---|---|\n| Rp_WheelSpeed | R | If_WheelSpeed | Sender-Receiver | wheelSpeed | uint16 | km/h |\n| Pp_VehicleSpeed | P | If_VehicleSpeed | Sender-Receiver | vehicleSpeed | uint16 | km/h |\n| Pp_VehicleAccel | P | If_VehicleAccel | Sender-Receiver | vehicleAccel | sint16 | m/s2 |"
+    },
+    {
+     "kind": "text",
+     "page": 2,
+     "text": "Runnable Rn_CalcVehicleSpeed is triggered every 10 ms by a timing event. It reads wheelSpeed through Rp_WheelSpeed. It writes vehicleSpeed through Pp_VehicleSpeed. It writes vehicleAccel through Pp_VehicleAccel."
+    }
+   ]
+  },
+  {
+   "section_id": "HLD_CruiseControl_v1.1::S008",
+   "doc_id": "HLD_CruiseControl_v1.1",
+   "version": "1.1",
+   "number": "3.3",
+   "title": "3.3 SWC_CruiseControl",
+   "level": 2,
+   "path": [
+    "3 Software component descriptions",
+    "3.3 SWC_CruiseControl"
+   ],
+   "page_start": 3,
+   "page_end": 3,
+   "blocks": [
+    {
+     "kind": "text",
+     "page": 3,
+     "text": "Holds the driver set speed. It consumes the vehicle speed from the Vehicle Speed Calculator (SWC_VehSpeedCalc) and the brake status, and requests throttle from the engine control."
+    },
+    {
+     "kind": "table",
+     "page": 3,
+     "text": "| Port | Dir | Interface | Interface type | Data element | Data type | Unit |\n|---|---|---|---|---|---|---|\n| Rp_VehicleSpeed | R | If_VehicleSpeed | Sender-Receiver | vehicleSpeed | uint16 | km/h |\n| Rp_BrakeStatus | R | If_BrakeStatus | Sender-Receiver | brakeActive | boolean | - |\n| Pp_ThrottleRequest | P | If_ThrottleRequest | Sender-Receiver | throttlePct | uint8 | % |"
+    },
+    {
+     "kind": "text",
+     "page": 3,
+     "text": "Runnable Rn_CruiseControlStep is triggered every 10 ms by a timing event. It reads vehicleSpeed through Rp_VehicleSpeed. It reads brakeActive through Rp_BrakeStatus. It writes throttlePct through Pp_ThrottleRequest."
+    }
+   ]
+  },
+  {
+   "section_id": "HLD_CruiseControl_v1.1::S009",
+   "doc_id": "HLD_CruiseControl_v1.1",
+   "version": "1.1",
+   "number": "3.4",
+   "title": "3.4 SWC_EngineControl",
+   "level": 2,
+   "path": [
+    "3 Software component descriptions",
+    "3.4 SWC_EngineControl"
+   ],
+   "page_start": 3,
+   "page_end": 3,
+   "blocks": [
+    {
+     "kind": "text",
+     "page": 3,
+     "text": "Converts the throttle request into an actuator command for the electronic throttle."
+    },
+    {
+     "kind": "table",
+     "page": 3,
+     "text": "| Port | Dir | Interface | Interface type | Data element | Data type | Unit |\n|---|---|---|---|---|---|---|\n| Rp_ThrottleRequest | R | If_ThrottleRequest | Client-Server | throttlePct | uint8 | % |"
+    },
+    {
+     "kind": "text",
+     "page": 3,
+     "text": "Runnable Rn_ApplyThrottle is triggered every 10 ms by a timing event. It reads throttlePct through Rp_ThrottleRequest."
+    }
+   ]
+  },
+  {
+   "section_id": "HLD_CruiseControl_v1.1::S010",
+   "doc_id": "HLD_CruiseControl_v1.1",
+   "version": "1.1",
+   "number": "3.5",
+   "title": "3.5 SWC_DisplayCluster",
+   "level": 2,
+   "path": [
+    "3 Software component descriptions",
+    "3.5 SWC_DisplayCluster"
+   ],
+   "page_start": 4,
+   "page_end": 4,
+   "blocks": [
+    {
+     "kind": "text",
+     "page": 4,
+     "text": "Shows the current vehicle speed to the driver on the instrument cluster."
+    },
+    {
+     "kind": "table",
+     "page": 4,
+     "text": "| Port | Dir | Interface | Interface type | Data element | Data type | Unit |\n|---|---|---|---|---|---|---|\n| Rp_VehicleSpeed | R | If_VehicleSpeed | Sender-Receiver | vehicleSpeed | uint8 | mph |"
+    },
+    {
+     "kind": "text",
+     "page": 4,
+     "text": "Runnable Rn_UpdateDisplay is triggered every 100 ms by a timing event. It reads vehicleSpeed through Rp_VehicleSpeed."
+    }
+   ]
+  },
+  {
+   "section_id": "HLD_CruiseControl_v1.1::S011",
+   "doc_id": "HLD_CruiseControl_v1.1",
+   "version": "1.1",
+   "number": "3.6",
+   "title": "3.6 SWC_BrakeManager",
+   "level": 2,
+   "path": [
+    "3 Software component descriptions",
+    "3.6 SWC_BrakeManager"
+   ],
+   "page_start": 4,
+   "page_end": 4,
+   "blocks": [
+    {
+     "kind": "text",
+     "page": 4,
+     "text": "Reads the brake pedal switch and publishes the brake status."
+    },
+    {
+     "kind": "table",
+     "page": 4,
+     "text": "| Port | Dir | Interface | Interface type | Data element | Data type | Unit |\n|---|---|---|---|---|---|---|\n| Pp_BrakeStatus | P | If_BrakeStatus | Sender-Receiver | brakeActive | boolean | - |"
+    },
+    {
+     "kind": "text",
+     "page": 4,
+     "text": "Runnable Rn_ReadBrake is triggered every 10 ms by a timing event. It writes brakeActive through Pp_BrakeStatus."
+    }
+   ]
+  },
+  {
+   "section_id": "HLD_CruiseControl_v1.1::S012",
+   "doc_id": "HLD_CruiseControl_v1.1",
+   "version": "1.1",
+   "number": "4",
+   "title": "4 Revision history",
+   "level": 1,
+   "path": [
+    "4 Revision history"
+   ],
+   "page_start": 5,
+   "page_end": 5,
+   "blocks": [
+    {
+     "kind": "table",
+     "page": 5,
+     "text": "| Version | Date | Change |\n|---|---|---|\n| 1.0 | 2026-09-01 | Initial release |\n| 1.1 | 2026-09-20 | Added SWC_BrakeManager; periods of SWC_WheelSpeedSensor and SWC_CruiseControl cha |"
+    }
+   ]
+  }
+ ]
+}

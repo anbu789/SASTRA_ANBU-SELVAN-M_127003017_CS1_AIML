@@ -1,0 +1,14 @@
+{
+  "20813035cb411857": {
+    "user": "viewer_demo",
+    "role": "viewer"
+  },
+  "e92de9c97c495835": {
+    "user": "engineer_demo",
+    "role": "engineer"
+  },
+  "5d33375a102308ae": {
+    "user": "admin_demo",
+    "role": "admin"
+  }
+}

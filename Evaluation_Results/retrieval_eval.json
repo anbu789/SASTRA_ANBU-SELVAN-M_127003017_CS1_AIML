@@ -1,0 +1,47 @@
+{
+  "dense only (Chroma)": {
+    "recall_at_3": 0.9,
+    "per_question": {
+      "Q01": true,
+      "Q02": true,
+      "Q03": true,
+      "Q04": true,
+      "Q05": true,
+      "Q06": true,
+      "Q07": true,
+      "Q08": true,
+      "Q09": false,
+      "Q10": true
+    }
+  },
+  "hybrid (dense+BM25, RRF)": {
+    "recall_at_3": 1.0,
+    "per_question": {
+      "Q01": true,
+      "Q02": true,
+      "Q03": true,
+      "Q04": true,
+      "Q05": true,
+      "Q06": true,
+      "Q07": true,
+      "Q08": true,
+      "Q09": true,
+      "Q10": true
+    }
+  },
+  "hybrid + cross-encoder rerank": {
+    "recall_at_3": 1.0,
+    "per_question": {
+      "Q01": true,
+      "Q02": true,
+      "Q03": true,
+      "Q04": true,
+      "Q05": true,
+      "Q06": true,
+      "Q07": true,
+      "Q08": true,
+      "Q09": true,
+      "Q10": true
+    }
+  }
+}

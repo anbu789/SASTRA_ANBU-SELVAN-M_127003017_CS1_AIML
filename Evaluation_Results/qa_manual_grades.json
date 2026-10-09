@@ -1,0 +1,59 @@
+{
+  "model": "qwen2.5:3b",
+  "answer_accuracy": 0.7,
+  "citation_accuracy": 0.7,
+  "fully_correct": 0.5,
+  "refusals_correct": "2/2",
+  "grades": {
+    "Q01": {
+      "answer": 0,
+      "citation": 1,
+      "note": "Lists SWC_VehSpeedCalc as a consumer; it is named as the source of the speed, not a consumer"
+    },
+    "Q02": {
+      "answer": 1,
+      "citation": 0,
+      "note": "20 is right (unit missing), but it cites SWC_DisplayCluster instead of the catalogue or 3.3"
+    },
+    "Q03": {
+      "answer": 1,
+      "citation": 0,
+      "note": "10 ms is right, but it cites SWC_EngineControl, which happens to also have a 10 ms period"
+    },
+    "Q04": {
+      "answer": 1,
+      "citation": 1,
+      "note": ""
+    },
+    "Q05": {
+      "answer": 0,
+      "citation": 1,
+      "note": "The answer field contains '1, 2', the evidence numbers, instead of the interface types"
+    },
+    "Q06": {
+      "answer": 0,
+      "citation": 0,
+      "note": "Says SWC_VehicleSpeedCalc provides the brake status; nothing does. Confident wrong answer"
+    },
+    "Q07": {
+      "answer": 1,
+      "citation": 1,
+      "note": ""
+    },
+    "Q08": {
+      "answer": 1,
+      "citation": 1,
+      "note": ""
+    },
+    "Q09": {
+      "answer": 1,
+      "citation": 1,
+      "note": ""
+    },
+    "Q10": {
+      "answer": 1,
+      "citation": 1,
+      "note": "Faithful to the document's revision text; the 10->5 and 20->10 values need a version comparison"
+    }
+  }
+}

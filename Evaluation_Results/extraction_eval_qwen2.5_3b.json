@@ -1,0 +1,38 @@
+{
+  "HLD_CruiseControl_v1.0": {
+    "model": "qwen2.5:3b",
+    "seconds": 251,
+    "components": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "matched": 5,
+      "predicted": 5,
+      "gold": 5
+    },
+    "ports": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "matched": 9,
+      "predicted": 9,
+      "gold": 9
+    }
+  },
+  "HLD_CruiseControl_v1.1": {
+    "model": "qwen2.5:3b",
+    "seconds": 264,
+    "components": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "matched": 6,
+      "predicted": 6,
+      "gold": 6
+    },
+    "ports": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "matched": 10,
+      "predicted": 10,
+      "gold": 10
+    }
+  }
+}

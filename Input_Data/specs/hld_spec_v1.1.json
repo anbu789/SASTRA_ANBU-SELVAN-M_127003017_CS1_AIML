@@ -1,0 +1,162 @@
+{
+ "title": "Cruise Control Subsystem - AUTOSAR High-Level Design",
+ "version": "1.1",
+ "revisions": [
+  [
+   "1.0",
+   "2026-09-01",
+   "Initial release"
+  ],
+  [
+   "1.1",
+   "2026-09-20",
+   "Added SWC_BrakeManager; periods of SWC_WheelSpeedSensor and SWC_CruiseControl changed"
+  ]
+ ],
+ "components": [
+  {
+   "name": "SWC_WheelSpeedSensor",
+   "kind": "Sensor-actuator SWC",
+   "runnable": "Rn_ReadWheelSpeed",
+   "period_ms": 5,
+   "desc": "Reads the wheel speed pulses through the ECU abstraction layer and publishes the filtered wheel speed to the application layer.",
+   "ports": [
+    {
+     "port": "Pp_WheelSpeed",
+     "dir": "P",
+     "interface": "If_WheelSpeed",
+     "itype": "Sender-Receiver",
+     "element": "wheelSpeed",
+     "dtype": "uint16",
+     "unit": "km/h"
+    }
+   ]
+  },
+  {
+   "name": "SWC_VehicleSpeedCalc",
+   "kind": "Application SWC",
+   "runnable": "Rn_CalcVehicleSpeed",
+   "period_ms": 10,
+   "desc": "Calculates the vehicle speed and the longitudinal acceleration from the wheel speed and publishes both values.",
+   "ports": [
+    {
+     "port": "Rp_WheelSpeed",
+     "dir": "R",
+     "interface": "If_WheelSpeed",
+     "itype": "Sender-Receiver",
+     "element": "wheelSpeed",
+     "dtype": "uint16",
+     "unit": "km/h"
+    },
+    {
+     "port": "Pp_VehicleSpeed",
+     "dir": "P",
+     "interface": "If_VehicleSpeed",
+     "itype": "Sender-Receiver",
+     "element": "vehicleSpeed",
+     "dtype": "uint16",
+     "unit": "km/h"
+    },
+    {
+     "port": "Pp_VehicleAccel",
+     "dir": "P",
+     "interface": "If_VehicleAccel",
+     "itype": "Sender-Receiver",
+     "element": "vehicleAccel",
+     "dtype": "sint16",
+     "unit": "m/s2"
+    }
+   ]
+  },
+  {
+   "name": "SWC_CruiseControl",
+   "kind": "Application SWC",
+   "runnable": "Rn_CruiseControlStep",
+   "period_ms": 10,
+   "desc": "Holds the driver set speed. It consumes the vehicle speed from the Vehicle Speed Calculator (SWC_VehSpeedCalc) and the brake status, and requests throttle from the engine control.",
+   "ports": [
+    {
+     "port": "Rp_VehicleSpeed",
+     "dir": "R",
+     "interface": "If_VehicleSpeed",
+     "itype": "Sender-Receiver",
+     "element": "vehicleSpeed",
+     "dtype": "uint16",
+     "unit": "km/h"
+    },
+    {
+     "port": "Rp_BrakeStatus",
+     "dir": "R",
+     "interface": "If_BrakeStatus",
+     "itype": "Sender-Receiver",
+     "element": "brakeActive",
+     "dtype": "boolean",
+     "unit": "-"
+    },
+    {
+     "port": "Pp_ThrottleRequest",
+     "dir": "P",
+     "interface": "If_ThrottleRequest",
+     "itype": "Sender-Receiver",
+     "element": "throttlePct",
+     "dtype": "uint8",
+     "unit": "%"
+    }
+   ]
+  },
+  {
+   "name": "SWC_EngineControl",
+   "kind": "Application SWC",
+   "runnable": "Rn_ApplyThrottle",
+   "period_ms": 10,
+   "desc": "Converts the throttle request into an actuator command for the electronic throttle.",
+   "ports": [
+    {
+     "port": "Rp_ThrottleRequest",
+     "dir": "R",
+     "interface": "If_ThrottleRequest",
+     "itype": "Client-Server",
+     "element": "throttlePct",
+     "dtype": "uint8",
+     "unit": "%"
+    }
+   ]
+  },
+  {
+   "name": "SWC_DisplayCluster",
+   "kind": "Application SWC",
+   "runnable": "Rn_UpdateDisplay",
+   "period_ms": 100,
+   "desc": "Shows the current vehicle speed to the driver on the instrument cluster.",
+   "ports": [
+    {
+     "port": "Rp_VehicleSpeed",
+     "dir": "R",
+     "interface": "If_VehicleSpeed",
+     "itype": "Sender-Receiver",
+     "element": "vehicleSpeed",
+     "dtype": "uint8",
+     "unit": "mph"
+    }
+   ]
+  },
+  {
+   "name": "SWC_BrakeManager",
+   "kind": "Sensor-actuator SWC",
+   "runnable": "Rn_ReadBrake",
+   "period_ms": 10,
+   "desc": "Reads the brake pedal switch and publishes the brake status.",
+   "ports": [
+    {
+     "port": "Pp_BrakeStatus",
+     "dir": "P",
+     "interface": "If_BrakeStatus",
+     "itype": "Sender-Receiver",
+     "element": "brakeActive",
+     "dtype": "boolean",
+     "unit": "-"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,22 @@
+[
+ {
+  "type": "component_added",
+  "where": "SWC_BrakeManager"
+ },
+ {
+  "type": "period_changed",
+  "where": "SWC_WheelSpeedSensor",
+  "old": 10,
+  "new": 5
+ },
+ {
+  "type": "period_changed",
+  "where": "SWC_CruiseControl",
+  "old": 20,
+  "new": 10
+ },
+ {
+  "type": "issue_resolved",
+  "where": "ISS-01 (Pp_BrakeStatus now provided)"
+ }
+]

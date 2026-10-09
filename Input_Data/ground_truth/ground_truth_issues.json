@@ -1,0 +1,32 @@
+[
+ {
+  "id": "ISS-01",
+  "type": "missing_provider",
+  "where": "SWC_CruiseControl.Rp_BrakeStatus"
+ },
+ {
+  "id": "ISS-02",
+  "type": "interface_type_mismatch",
+  "where": "If_ThrottleRequest (Sender-Receiver vs Client-Server)"
+ },
+ {
+  "id": "ISS-03",
+  "type": "data_type_mismatch",
+  "where": "If_VehicleSpeed.vehicleSpeed (uint16 vs uint8 in SWC_DisplayCluster)"
+ },
+ {
+  "id": "ISS-04",
+  "type": "unit_mismatch",
+  "where": "If_VehicleSpeed.vehicleSpeed (km/h vs mph in SWC_DisplayCluster)"
+ },
+ {
+  "id": "ISS-05",
+  "type": "orphan_provider",
+  "where": "SWC_VehicleSpeedCalc.Pp_VehicleAccel"
+ },
+ {
+  "id": "ISS-06",
+  "type": "terminology_inconsistency",
+  "where": "SWC_VehSpeedCalc vs SWC_VehicleSpeedCalc"
+ }
+]

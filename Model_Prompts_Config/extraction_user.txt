@@ -1,0 +1,5 @@
+COMPONENT CATALOGUE (context):
+{catalogue}
+
+SECTION TEXT (extract the component described in this section):
+{section}

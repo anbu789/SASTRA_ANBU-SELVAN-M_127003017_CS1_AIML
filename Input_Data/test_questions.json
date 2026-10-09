@@ -1,0 +1,86 @@
+[
+  {
+    "id": "Q01",
+    "version": "1.0",
+    "type": "answerable",
+    "q": "Which components consume the vehicle speed?",
+    "expected": "SWC_CruiseControl and SWC_DisplayCluster, through their Rp_VehicleSpeed ports"
+  },
+  {
+    "id": "Q02",
+    "version": "1.0",
+    "type": "answerable",
+    "q": "What is the period of the cruise control runnable?",
+    "expected": "20 ms (Rn_CruiseControlStep)"
+  },
+  {
+    "id": "Q03",
+    "version": "1.1",
+    "type": "answerable",
+    "q": "What is the period of the cruise control runnable?",
+    "expected": "10 ms (changed from 20 ms in version 1.1)"
+  },
+  {
+    "id": "Q04",
+    "version": "1.0",
+    "type": "answerable",
+    "q": "Which component provides the wheel speed?",
+    "expected": "SWC_WheelSpeedSensor, through Pp_WheelSpeed"
+  },
+  {
+    "id": "Q05",
+    "version": "1.0",
+    "type": "answerable",
+    "q": "Which interface type does If_ThrottleRequest use in SWC_CruiseControl and in SWC_EngineControl?",
+    "expected": "Sender-Receiver in SWC_CruiseControl, Client-Server in SWC_EngineControl"
+  },
+  {
+    "id": "Q06",
+    "version": "1.0",
+    "type": "answerable",
+    "q": "Which component provides the brake status?",
+    "expected": "None in version 1.0; Rp_BrakeStatus of SWC_CruiseControl has no provider"
+  },
+  {
+    "id": "Q07",
+    "version": "1.1",
+    "type": "answerable",
+    "q": "Which component provides the brake status?",
+    "expected": "SWC_BrakeManager, through Pp_BrakeStatus"
+  },
+  {
+    "id": "Q08",
+    "version": "1.0",
+    "type": "answerable",
+    "q": "Which data type and unit does SWC_DisplayCluster use for the vehicle speed?",
+    "expected": "uint8 and mph"
+  },
+  {
+    "id": "Q09",
+    "version": "1.0",
+    "type": "answerable",
+    "q": "What does SWC_DisplayCluster do?",
+    "expected": "Shows the current vehicle speed to the driver on the instrument cluster"
+  },
+  {
+    "id": "Q10",
+    "version": "1.1",
+    "type": "answerable",
+    "q": "What changed in version 1.1?",
+    "expected": "Added SWC_BrakeManager; periods of SWC_WheelSpeedSensor (10 to 5 ms) and SWC_CruiseControl (20 to 10 ms) changed"
+  },
+  {
+    "id": "Q11",
+    "version": "1.0",
+    "type": "not_in_document",
+    "q": "What is the maximum torque of the engine?",
+    "expected": "The system should say the document does not contain this"
+  },
+  {
+    "id": "Q12",
+    "version": "1.0",
+    "type": "out_of_scope",
+    "q": "What is the capital of France?",
+    "expected": "The system should refuse as out of scope"
+  }
+]

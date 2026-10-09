@@ -1,0 +1,152 @@
+{
+ "components": [
+  {
+   "name": "SWC_WheelSpeedSensor",
+   "kind": "Sensor-actuator SWC",
+   "runnable": "Rn_ReadWheelSpeed",
+   "period_ms": 10
+  },
+  {
+   "name": "SWC_VehicleSpeedCalc",
+   "kind": "Application SWC",
+   "runnable": "Rn_CalcVehicleSpeed",
+   "period_ms": 10
+  },
+  {
+   "name": "SWC_CruiseControl",
+   "kind": "Application SWC",
+   "runnable": "Rn_CruiseControlStep",
+   "period_ms": 20
+  },
+  {
+   "name": "SWC_EngineControl",
+   "kind": "Application SWC",
+   "runnable": "Rn_ApplyThrottle",
+   "period_ms": 10
+  },
+  {
+   "name": "SWC_DisplayCluster",
+   "kind": "Application SWC",
+   "runnable": "Rn_UpdateDisplay",
+   "period_ms": 100
+  }
+ ],
+ "ports": [
+  {
+   "component": "SWC_WheelSpeedSensor",
+   "port": "Pp_WheelSpeed",
+   "dir": "P",
+   "interface": "If_WheelSpeed",
+   "itype": "Sender-Receiver",
+   "element": "wheelSpeed",
+   "dtype": "uint16",
+   "unit": "km/h"
+  },
+  {
+   "component": "SWC_VehicleSpeedCalc",
+   "port": "Rp_WheelSpeed",
+   "dir": "R",
+   "interface": "If_WheelSpeed",
+   "itype": "Sender-Receiver",
+   "element": "wheelSpeed",
+   "dtype": "uint16",
+   "unit": "km/h"
+  },
+  {
+   "component": "SWC_VehicleSpeedCalc",
+   "port": "Pp_VehicleSpeed",
+   "dir": "P",
+   "interface": "If_VehicleSpeed",
+   "itype": "Sender-Receiver",
+   "element": "vehicleSpeed",
+   "dtype": "uint16",
+   "unit": "km/h"
+  },
+  {
+   "component": "SWC_VehicleSpeedCalc",
+   "port": "Pp_VehicleAccel",
+   "dir": "P",
+   "interface": "If_VehicleAccel",
+   "itype": "Sender-Receiver",
+   "element": "vehicleAccel",
+   "dtype": "sint16",
+   "unit": "m/s2"
+  },
+  {
+   "component": "SWC_CruiseControl",
+   "port": "Rp_VehicleSpeed",
+   "dir": "R",
+   "interface": "If_VehicleSpeed",
+   "itype": "Sender-Receiver",
+   "element": "vehicleSpeed",
+   "dtype": "uint16",
+   "unit": "km/h"
+  },
+  {
+   "component": "SWC_CruiseControl",
+   "port": "Rp_BrakeStatus",
+   "dir": "R",
+   "interface": "If_BrakeStatus",
+   "itype": "Sender-Receiver",
+   "element": "brakeActive",
+   "dtype": "boolean",
+   "unit": "-"
+  },
+  {
+   "component": "SWC_CruiseControl",
+   "port": "Pp_ThrottleRequest",
+   "dir": "P",
+   "interface": "If_ThrottleRequest",
+   "itype": "Sender-Receiver",
+   "element": "throttlePct",
+   "dtype": "uint8",
+   "unit": "%"
+  },
+  {
+   "component": "SWC_EngineControl",
+   "port": "Rp_ThrottleRequest",
+   "dir": "R",
+   "interface": "If_ThrottleRequest",
+   "itype": "Client-Server",
+   "element": "throttlePct",
+   "dtype": "uint8",
+   "unit": "%"
+  },
+  {
+   "component": "SWC_DisplayCluster",
+   "port": "Rp_VehicleSpeed",
+   "dir": "R",
+   "interface": "If_VehicleSpeed",
+   "itype": "Sender-Receiver",
+   "element": "vehicleSpeed",
+   "dtype": "uint8",
+   "unit": "mph"
+  }
+ ],
+ "interfaces": [
+  {
+   "name": "If_BrakeStatus",
+   "type": "Sender-Receiver"
+  },
+  {
+   "name": "If_ThrottleRequest",
+   "type": "Client-Server"
+  },
+  {
+   "name": "If_ThrottleRequest",
+   "type": "Sender-Receiver"
+  },
+  {
+   "name": "If_VehicleAccel",
+   "type": "Sender-Receiver"
+  },
+  {
+   "name": "If_VehicleSpeed",
+   "type": "Sender-Receiver"
+  },
+  {
+   "name": "If_WheelSpeed",
+   "type": "Sender-Receiver"
+  }
+ ]
+}
