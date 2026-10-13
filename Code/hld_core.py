@@ -68,7 +68,7 @@ class Answer(BaseModel):
     answer: str
     citations: List[int]
 
-def ask(q, version=None, k=3, actor="user"):
+def ask_llm(q, version=None, k=3, actor="user"):
     hits = hybrid_search(q, k=k, version=version)
     top = hits[0]["score"] if hits else -99.0
     if top < CFG["MIN_LOGIT"]:
@@ -128,3 +128,23 @@ def review(table, row_id, status, updates, actor):
 
 def export(doc_id):
     return {t: [r for r in list_rows(t, doc_id) if r["review_status"] != "rejected"] for t in TABLES}
+
+
+def list_flow(doc_id):
+    with db() as con:
+        try: return [dict(r) for r in con.execute("SELECT component, report, page FROM flow_reports WHERE doc_id=? ORDER BY rowid", (doc_id,))]
+        except sqlite3.OperationalError: return []
+
+
+# ---------- routing and citation check (added) ----------
+import qa_router
+
+def ask(q, version=None, k=3, actor="user"):
+    r = qa_router.route(q, version, STORE)
+    if r is not None:
+        audit(actor, "ask_db", q[:60], f'{r["status"]} route={r["route"]}')
+        return r
+    res = ask_llm(q, version, k, actor)
+    cited = [CHUNKS[CHUNK_IDX[res["evidence"][c["n"] - 1]]]["text"] for c in res["citations"]]
+    res.setdefault("source", "llm")
+    return qa_router.check_llm_result(res, cited)

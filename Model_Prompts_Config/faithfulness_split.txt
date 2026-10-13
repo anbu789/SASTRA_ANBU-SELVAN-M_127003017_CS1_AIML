@@ -1,0 +1,2 @@
+Rewrite an answer as a list of short, self-contained factual statements.
+Rules: use only what the answer says; do not add facts; take a missing subject from the question; one to three statements; copy names exactly.

@@ -1,0 +1,28 @@
+services:
+  api:
+    build: .
+    image: hld-assistant:latest
+    network_mode: host            # reaches Ollama on the host's localhost; the API listens on 127.0.0.1 only
+    user: "1000:1000"             # must match `id -u` and `id -g` on your machine
+    working_dir: /project/Code
+    volumes:
+      - ..:/project
+    environment:
+      - HOME=/tmp
+      - CUDA_VISIBLE_DEVICES=-1
+    command: python -m uvicorn api:app --host 127.0.0.1 --port 8000
+    restart: unless-stopped
+  app:
+    image: hld-assistant:latest
+    network_mode: host
+    user: "1000:1000"
+    working_dir: /project/Code
+    volumes:
+      - ..:/project
+    environment:
+      - HOME=/tmp
+      - CUDA_VISIBLE_DEVICES=-1
+    command: python -m streamlit run app.py --server.address 127.0.0.1 --server.port 8501 --server.headless true --browser.gatherUsageStats false
+    depends_on:
+      - api
+    restart: unless-stopped

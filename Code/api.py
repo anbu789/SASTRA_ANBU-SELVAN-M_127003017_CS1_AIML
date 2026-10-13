@@ -78,3 +78,7 @@ def export(doc_id: str, fmt: str = "json", table: str = "ports", u=Depends(auth(
 def audit_log(limit: int = 200, u=Depends(auth("admin"))):
     with core.db() as con:
         return [dict(r) for r in con.execute("SELECT * FROM audit_log ORDER BY id DESC LIMIT ?", (limit,))]
+
+
+@app.get("/flow/{doc_id}")
+def flow(doc_id: str, u=Depends(auth("viewer"))): return core.list_flow(doc_id)

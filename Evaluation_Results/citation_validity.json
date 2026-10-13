@@ -1,0 +1,26 @@
+[
+  {
+    "run":"Run 1, set 1 (model only)",
+    "answers_given":10,
+    "from_database":0,
+    "from_model":10,
+    "valid_citations":"6\/10",
+    "model_answers_valid":"6\/10"
+  },
+  {
+    "run":"Run 2, set 1 (router + check)",
+    "answers_given":10,
+    "from_database":9,
+    "from_model":1,
+    "valid_citations":"10\/10",
+    "model_answers_valid":"1\/1"
+  },
+  {
+    "run":"Run 2, set 2 (router + check)",
+    "answers_given":14,
+    "from_database":10,
+    "from_model":4,
+    "valid_citations":"13\/14",
+    "model_answers_valid":"3\/4"
+  }
+]

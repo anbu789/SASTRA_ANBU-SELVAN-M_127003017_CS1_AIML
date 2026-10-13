@@ -1,0 +1,357 @@
+{
+  "Run 1, set 1 (model only) | Q01": {
+    "run": "Run 1, set 1 (model only)",
+    "id": "Q01",
+    "question": "Which components consume the vehicle speed?",
+    "answer": "SWC_VehSpeedCalc, SWC_CruiseControl, SWC_DisplayCluster",
+    "judge": "qwen2.5:3b",
+    "statements": [
+      {
+        "statement": "SWC_VehSpeedCalc consumes vehicle speed.",
+        "supported": true,
+        "reason": "Calculates the vehicle speed and the longitudinal acceleration from the wheel speed and publishes both values. It reads wheelSpeed through Rp_WheelSpeed. It writes vehicleSpeed through Pp_VehicleSpeed."
+      },
+      {
+        "statement": "SWC_CruiseControl consumes vehicle speed.",
+        "supported": true,
+        "reason": "Holds the driver set speed. It consumes the vehicle speed from the Vehicle Speed Calculator (SWC_VehSpeedCalc) and the brake status, and requests throttle from the engine control."
+      },
+      {
+        "statement": "SWC_DisplayCluster consumes vehicle speed.",
+        "supported": true,
+        "reason": "Shows the current vehicle speed to the driver on the instrument cluster. It reads vehicleSpeed through Rp_VehicleSpeed."
+      }
+    ]
+  },
+  "Run 1, set 1 (model only) | Q02": {
+    "run": "Run 1, set 1 (model only)",
+    "id": "Q02",
+    "question": "What is the period of the cruise control runnable?",
+    "answer": "20",
+    "judge": "qwen2.5:3b",
+    "statements": [
+      {
+        "statement": "Cruise control is runnable for 20",
+        "supported": true,
+        "reason": "SWC_CruiseControl is listed as an Application SWC with a Runnable Rn_CruiseControlStep that is triggered every 20 ms by a timing event."
+      },
+      {
+        "statement": "The period of cruise control runnable is 20",
+        "supported": true,
+        "reason": "SWC_CruiseControl's Runnable Rn_CruiseControlStep is described as being triggered every 20 ms."
+      },
+      {
+        "statement": "Cruise control's operational period is 20",
+        "supported": true,
+        "reason": "SWC_CruiseControl's Runnable Rn_CruiseControlStep is specified to run every 20 ms."
+      }
+    ]
+  },
+  "Run 1, set 1 (model only) | Q03": {
+    "run": "Run 1, set 1 (model only)",
+    "id": "Q03",
+    "question": "What is the period of the cruise control runnable?",
+    "answer": "10 ms",
+    "judge": "qwen2.5:3b",
+    "statements": [
+      {
+        "statement": "Rules for cruise control operation are not specified here.",
+        "supported": false,
+        "reason": "The evidence specifies the timing and operation of cruise control components, indicating that rules for cruise control operation are indeed specified."
+      },
+      {
+        "statement": "The period of the cruise control runnable is 10 ms.",
+        "supported": true,
+        "reason": "Runnable Rn_CruiseControlStep is triggered every 10 ms by a timing event."
+      },
+      {
+        "statement": "Further details about cruise control are not provided in the given information.",
+        "supported": false,
+        "reason": "The evidence provides details about the SWC_CruiseControl component, including its Runnable Rn_CruiseControlStep which is triggered every 10 ms by a timing event."
+      }
+    ]
+  },
+  "Run 1, set 1 (model only) | Q04": {
+    "run": "Run 1, set 1 (model only)",
+    "id": "Q04",
+    "question": "Which component provides the wheel speed?",
+    "answer": "SWC_WheelSpeedSensor",
+    "judge": "qwen2.5:3b",
+    "statements": [
+      {
+        "statement": "Wheel speed is provided by SWC_WheelSpeedSensor.",
+        "supported": false,
+        "reason": "The evidence does not mention SWC_WheelSpeedSensor providing wheel speed, instead it describes SWC_WheelSpeedSensor reading wheel speed pulses through the ECU abstraction layer."
+      },
+      {
+        "statement": "The component that provides wheel speed is SWC_WheelSpeedSensor.",
+        "supported": false,
+        "reason": "The evidence does not mention SWC_WheelSpeedSensor providing wheel speed. Instead, it describes how wheel speed is read by other components."
+      },
+      {
+        "statement": "SWC_WheelSpeedSensor is responsible for providing wheel speed.",
+        "supported": true,
+        "reason": "SWC_WheelSpeedSensor reads the wheel speed pulses through the ECU abstraction layer and publishes the filtered wheel speed to the application layer."
+      }
+    ]
+  },
+  "Run 1, set 1 (model only) | Q05": {
+    "run": "Run 1, set 1 (model only)",
+    "id": "Q05",
+    "question": "Which interface type does If_ThrottleRequest use in SWC_CruiseControl and in SWC_EngineControl?",
+    "answer": "1, 2",
+    "judge": "qwen2.5:3b",
+    "statements": [
+      {
+        "statement": "If_ThrottleRequest uses interface type 1 in SWC_CruiseControl.",
+        "supported": false,
+        "reason": "The evidence states that Rp_ThrottleRequest uses If_ThrottleRequest, not If_ThrottleRequest uses Rp_ThrottleRequest."
+      },
+      {
+        "statement": "If_ThrottleRequest uses interface type 2 in SWC_EngineControl.",
+        "supported": false,
+        "reason": "The evidence states that Rp_ThrottleRequest is used in SWC_EngineControl, not If_ThrottleRequest."
+      }
+    ]
+  },
+  "Run 1, set 1 (model only) | Q06": {
+    "run": "Run 1, set 1 (model only)",
+    "id": "Q06",
+    "question": "Which component provides the brake status?",
+    "answer": "SWC_VehicleSpeedCalc",
+    "judge": "qwen2.5:3b",
+    "statements": [
+      {
+        "statement": "SWC_VehicleSpeedCalc provides brake status.",
+        "supported": false,
+        "reason": "SWC_VehicleSpeedCalc does not provide brake status, it calculates vehicle speed."
+      },
+      {
+        "statement": "SWC_VehicleSpeedCalc is a component that provides brake status.",
+        "supported": false,
+        "reason": "SWC_VehicleSpeedCalc is described as an Application SWC that calculates vehicle speed, not providing brake status."
+      },
+      {
+        "statement": "SWC_VehicleSpeedCalc is responsible for providing brake status.",
+        "supported": false,
+        "reason": "SWC_VehicleSpeedCalc does not mention anything about providing brake status. It is only responsible for calculating vehicle speed."
+      }
+    ]
+  },
+  "Run 1, set 1 (model only) | Q07": {
+    "run": "Run 1, set 1 (model only)",
+    "id": "Q07",
+    "question": "Which component provides the brake status?",
+    "answer": "SWC_BrakeManager",
+    "judge": "qwen2.5:3b",
+    "statements": [
+      {
+        "statement": "SWC_BrakeManager provides brake status.",
+        "supported": true,
+        "reason": "SWC_BrakeManager reads the brake pedal switch and publishes the brake status."
+      },
+      {
+        "statement": "The BrakeManager component is responsible for brake status.",
+        "supported": true,
+        "reason": "The evidence states that the BrakeManager component reads the brake pedal switch and publishes the brake status."
+      },
+      {
+        "statement": "SWC_BrakeManager is the component that offers brake status information.",
+        "supported": true,
+        "reason": "SWC_BrakeManager is described as a Sensor-actuator SWC that triggers Rn_ReadBrake every 10 ms, which reads the brake status."
+      }
+    ]
+  },
+  "Run 1, set 1 (model only) | Q08": {
+    "run": "Run 1, set 1 (model only)",
+    "id": "Q08",
+    "question": "Which data type and unit does SWC_DisplayCluster use for the vehicle speed?",
+    "answer": "SWC_DisplayCluster uses uint8 for vehicle speed and the unit is mph.",
+    "judge": "qwen2.5:3b",
+    "statements": [
+      {
+        "statement": "SWC_DisplayCluster uses uint8 for vehicle speed.",
+        "supported": true,
+        "reason": "The evidence states that HLD_CruiseControl_v1.0 v1.0 | 3 Software component descriptions > 3.5 SWC_DisplayCluster shows the current vehicle speed to the driver on the instrument cluster using Rp_VehicleSpeed with Rp_VehicleSpeed's data element vehicleSpeed having a data type of uint8."
+      },
+      {
+        "statement": "Vehicle speed unit used by SWC_DisplayCluster is mph.",
+        "supported": false,
+        "reason": "The evidence states that the SWC_DisplayCluster shows the current vehicle speed to the driver in mph, but it does not specify the unit used by SWC_DisplayCluster itself."
+      }
+    ]
+  },
+  "Run 1, set 1 (model only) | Q09": {
+    "run": "Run 1, set 1 (model only)",
+    "id": "Q09",
+    "question": "What does SWC_DisplayCluster do?",
+    "answer": "SWC_DisplayCluster shows the current vehicle speed to the driver on the instrument cluster.",
+    "judge": "qwen2.5:3b",
+    "statements": [
+      {
+        "statement": "SWC_DisplayCluster is part of the instrument cluster.",
+        "supported": true,
+        "reason": "SWC_DisplayCluster is described as showing the current vehicle speed to the driver on the instrument cluster."
+      },
+      {
+        "statement": "It displays the vehicle's current speed to the driver.",
+        "supported": true,
+        "reason": "The evidence states that the SWC_DisplayCluster shows the current vehicle speed to the driver on the instrument cluster."
+      },
+      {
+        "statement": "It is a component of the vehicle's dashboard.",
+        "supported": false,
+        "reason": "The evidence does not mention the component being a part of the vehicle's dashboard."
+      }
+    ]
+  },
+  "Run 1, set 1 (model only) | Q10": {
+    "run": "Run 1, set 1 (model only)",
+    "id": "Q10",
+    "question": "What changed in version 1.1?",
+    "answer": "In version 1.1, SWC_BrakeManager was added and periods of SWC_WheelSpeedSensor and SWC_CruiseControl changed.",
+    "judge": "qwen2.5:3b",
+    "statements": [
+      {
+        "statement": "SWC_BrakeManager was added in version 1.1.",
+        "supported": true,
+        "reason": "The evidence clearly states that SWC_BrakeManager was added in version 1.1."
+      },
+      {
+        "statement": "Periods of SWC_WheelSpeedSensor changed in version 1.1.",
+        "supported": true,
+        "reason": "The evidence clearly states that periods of SWC_WheelSpeedSensor and SWC_CruiseControl changed in version 1.1."
+      },
+      {
+        "statement": "SWC_CruiseControl periods also changed in version 1.1.",
+        "supported": false,
+        "reason": "The evidence does not mention any changes to SWC_CruiseControl periods in version 1.1."
+      }
+    ]
+  },
+  "Run 2, set 1 (router + check) | Q09": {
+    "run": "Run 2, set 1 (router + check)",
+    "id": "Q09",
+    "question": "What does SWC_DisplayCluster do?",
+    "answer": "SWC_DisplayCluster shows the current vehicle speed to the driver on the instrument cluster.",
+    "judge": "qwen2.5:3b",
+    "statements": [
+      {
+        "statement": "SWC_DisplayCluster is part of the instrument cluster.",
+        "supported": true,
+        "reason": "SWC_DisplayCluster is described as showing the current vehicle speed to the driver on the instrument cluster."
+      },
+      {
+        "statement": "It displays the current vehicle speed to the driver.",
+        "supported": true,
+        "reason": "The evidence states that the SWC_DisplayCluster shows the current vehicle speed to the driver on the instrument cluster."
+      },
+      {
+        "statement": "SWC_DisplayCluster is used in modern vehicles for safety.",
+        "supported": false,
+        "reason": "The evidence does not mention SWC_DisplayCluster being used for safety."
+      }
+    ]
+  },
+  "Run 2, set 2 (router + check) | S08": {
+    "run": "Run 2, set 2 (router + check)",
+    "id": "S08",
+    "question": "Summarise the purpose of the SWC_CruiseControl component.",
+    "answer": "Holds the driver set speed by consuming vehicle speed and brake status, and requests throttle from the engine control.",
+    "judge": "qwen2.5:3b",
+    "statements": [
+      {
+        "statement": "SWC_CruiseControl consumes vehicle speed data.",
+        "supported": true,
+        "reason": "Holds the driver set speed. It consumes the vehicle speed from the Vehicle Speed Calculator (SWC_VehSpeedCalc)"
+      },
+      {
+        "statement": "SWC_CruiseControl receives brake status information.",
+        "supported": true,
+        "reason": "Holds the driver set speed. It consumes the vehicle speed from the Vehicle Speed Calculator (SWC_VehSpeedCalc) and the brake status, and requests throttle from the engine control."
+      },
+      {
+        "statement": "SWC_CruiseControl requests throttle from engine control.",
+        "supported": true,
+        "reason": "HLD_CruiseControl_v1.0 v1.0 states that SWC_CruiseControl 'requests throttle from the engine control.' "
+      },
+      {
+        "statement": "Driver set speed is achieved through SWC_CruiseControl.",
+        "supported": false,
+        "reason": "The evidence shows that SWC_CruiseControl consumes the vehicle speed from SWC_VehSpeedCalc and the brake status, but does not directly set the driver set speed."
+      }
+    ]
+  },
+  "Run 2, set 2 (router + check) | S09": {
+    "run": "Run 2, set 2 (router + check)",
+    "id": "S09",
+    "question": "Which component reads the brake pedal switch?",
+    "answer": "SWC_BrakeManager",
+    "judge": "qwen2.5:3b",
+    "statements": [
+      {
+        "statement": "SWC_BrakeManager reads the brake pedal switch.",
+        "supported": true,
+        "reason": "Reads the brake pedal switch and publishes the brake status."
+      },
+      {
+        "statement": "This component is specific to vehicle braking systems.",
+        "supported": false,
+        "reason": "The evidence does not mention anything specific to vehicle braking systems, only mentions brake status and wheel speed."
+      },
+      {
+        "statement": "Its name indicates it manages brake-related functions.",
+        "supported": false,
+        "reason": "The evidence does not mention the name indicating it manages brake-related functions. Instead, it describes the BrakeManager component reading the brake pedal switch and publishing the brake status."
+      }
+    ]
+  },
+  "Run 2, set 2 (router + check) | M02": {
+    "run": "Run 2, set 2 (router + check)",
+    "id": "M02",
+    "question": "Which component sits between the wheel speed sensor and the cruise control in the speed signal chain?",
+    "answer": "SWC_VehicleSpeedCalc",
+    "judge": "qwen2.5:3b",
+    "statements": [
+      {
+        "statement": "SWC_VehicleSpeedCalc sits between the wheel speed sensor and the cruise control.",
+        "supported": false,
+        "reason": "The evidence does not mention SWC_VehicleSpeedCalc sitting between the wheel speed sensor and the cruise control."
+      },
+      {
+        "statement": "The speed signal chain includes components between the wheel speed sensor and the cruise control.",
+        "supported": true,
+        "reason": "The evidence shows that the SWC_WheelSpeedSensor reads wheel speed and passes it to SWC_VehicleSpeedCalc, which is a component between the wheel speed sensor and the cruise control."
+      },
+      {
+        "statement": "SWC_VehicleSpeedCalc is a component in the speed signal chain.",
+        "supported": true,
+        "reason": "SWC_VehicleSpeedCalc is mentioned in the architecture overview as a component that consumes the vehicle speed from SWC_WheelSpeedSensor, indicating its role in the speed signal chain."
+      }
+    ]
+  },
+  "Run 2, set 2 (router + check) | M05": {
+    "run": "Run 2, set 2 (router + check)",
+    "id": "M05",
+    "question": "Which CAN message carries the wheel speed?",
+    "answer": "Pp_WheelSpeed",
+    "judge": "qwen2.5:3b",
+    "statements": [
+      {
+        "statement": "CAN messages are used for vehicle communication.",
+        "supported": false,
+        "reason": "The evidence does not mention CAN messages or any communication protocol. It describes internal software components and their data flow without specifying any communication method."
+      },
+      {
+        "statement": "Pp_WheelSpeed is a specific CAN message.",
+        "supported": false,
+        "reason": "The evidence does not mention Pp_WheelSpeed as a specific CAN message, but rather as a data element used in the system."
+      },
+      {
+        "statement": "Pp_WheelSpeed carries wheel speed information.",
+        "supported": true,
+        "reason": "Runnable Rn_ReadWheelSpeed writes wheelSpeed through Pp_WheelSpeed."
+      }
+    ]
+  }
+}

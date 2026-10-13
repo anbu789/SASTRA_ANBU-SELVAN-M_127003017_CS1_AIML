@@ -1,0 +1,3 @@
+You check whether a statement is supported by the evidence.
+Set supported=true only if the evidence directly states or clearly implies the statement. If the evidence does not mention it, or says something different, set supported=false.
+Give a one-sentence reason. Use only the evidence.

@@ -60,7 +60,7 @@ def review_table(table):
         st.session_state["rev"] += 1
         st.success(f"Saved {n} change(s)."); st.rerun()
 
-t_ask, t_ent, t_find, t_exp, t_aud = st.tabs(["Ask", "Components and ports", "Findings", "Export", "Audit log"])
+t_ask, t_ent, t_find, t_flow, t_exp, t_aud = st.tabs(["Ask", "Components and ports", "Findings", "Functional flow", "Export", "Audit log"])
 
 with t_ask:
     versions = ["All approved versions"] + sorted({d["version"] for d in docs if d["status"] == "approved"})
@@ -72,10 +72,13 @@ with t_ask:
         st.session_state.setdefault("history", []).insert(0, res)
     for res in st.session_state.get("history", [])[:5]:
         st.markdown(f'**Q:** {res["question"]}')
-        line = f'Status: **{res["status"]}** | confidence indicator: **{res["confidence"]}** | top rerank score: {res["top_logit"]:.1f}'
+        src = 'database lookup (extracted rows, no LLM)' if res.get('source') == 'database' else 'LLM over retrieved text'
+        score = 'n/a' if res.get('top_logit') is None else f'{res["top_logit"]:.1f}'
+        line = f'Status: **{res["status"]}** | source: {src} | confidence indicator: **{res["confidence"]}** | top rerank score: {score}'
         (st.success if res["status"] == "answered" else st.warning)(line)
         st.write(res["answer"])
-        if res["status"] == "unverified": st.error("The model gave an answer without a valid citation. Do not rely on it.")
+        if res["status"] == "unverified":
+            st.error("This answer could not be verified against its citations (unsupported: " + ", ".join(map(str, res.get("unsupported", []))) + "). Do not rely on it.")
         if res["citations"]: st.dataframe(pd.DataFrame(res["citations"]), hide_index=True, use_container_width=True)
         st.caption("Verify against the cited page before use. Missing items (for example a port with no provider) are found by the Findings checks, not by Q&A.")
         st.divider()
@@ -101,3 +104,13 @@ with t_aud:
         st.dataframe(pd.DataFrame(call("GET", "/audit").json()), hide_index=True, use_container_width=True)
     else:
         st.info("The audit log is visible to admins only.")
+
+
+with t_flow:
+    st.caption("Built from the extracted ports (exact provider and consumer links) plus the purpose sentence from the document. No LLM wording.")
+    rows = call("GET", f"/flow/{doc_id}").json()
+    if not rows: st.info("No flow reports for this document yet. Run the flow report cell in the notebook.")
+    for r in rows:
+        st.markdown(f'**{r["component"]}** (page {r["page"]})')
+        st.write(r["report"].replace("\n", "\n\n"))
+        st.divider()

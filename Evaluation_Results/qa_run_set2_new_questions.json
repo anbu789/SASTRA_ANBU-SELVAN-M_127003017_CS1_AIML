@@ -1,0 +1,430 @@
+[
+  {
+    "question": "Which components use the brake status signal?",
+    "status": "answered",
+    "answer": "v1.1: SWC_CruiseControl (port Rp_BrakeStatus) consumes If_BrakeStatus.",
+    "citations": [
+      {
+        "n": 1,
+        "doc_id": "HLD_CruiseControl_v1.1",
+        "version": "1.1",
+        "section": "3 Software component descriptions > 3.3 SWC_CruiseControl",
+        "page": 3
+      },
+      {
+        "n": 2,
+        "doc_id": "HLD_CruiseControl_v1.1",
+        "version": "1.1",
+        "section": "3 Software component descriptions > 3.6 SWC_BrakeManager",
+        "page": 4
+      }
+    ],
+    "confidence": "high",
+    "top_logit": null,
+    "evidence": [],
+    "version": "1.1",
+    "source": "database",
+    "route": "consumes",
+    "id": "S01",
+    "type": "answerable",
+    "expected": "SWC_CruiseControl, through Rp_BrakeStatus",
+    "seconds": 0
+  },
+  {
+    "question": "Is there any component that supplies the vehicle acceleration?",
+    "status": "answered",
+    "answer": "v1.0: SWC_VehicleSpeedCalc (port Pp_VehicleAccel) provides If_VehicleAccel. No component consumes it.",
+    "citations": [
+      {
+        "n": 1,
+        "doc_id": "HLD_CruiseControl_v1.0",
+        "version": "1.0",
+        "section": "3 Software component descriptions > 3.2 SWC_VehicleSpeedCalc",
+        "page": 2
+      }
+    ],
+    "confidence": "high",
+    "top_logit": null,
+    "evidence": [],
+    "version": "1.0",
+    "source": "database",
+    "route": "provides",
+    "id": "S02",
+    "type": "answerable",
+    "expected": "Yes, SWC_VehicleSpeedCalc through Pp_VehicleAccel, but no component uses it",
+    "seconds": 0
+  },
+  {
+    "question": "What is the runnable period of the display cluster?",
+    "status": "answered",
+    "answer": "v1.0: SWC_DisplayCluster runs Rn_UpdateDisplay every 100 ms.",
+    "citations": [
+      {
+        "n": 1,
+        "doc_id": "HLD_CruiseControl_v1.0",
+        "version": "1.0",
+        "section": "3 Software component descriptions > 3.5 SWC_DisplayCluster",
+        "page": 4
+      }
+    ],
+    "confidence": "high",
+    "top_logit": null,
+    "evidence": [],
+    "version": "1.0",
+    "source": "database",
+    "route": "period",
+    "id": "S03",
+    "type": "answerable",
+    "expected": "100 ms (Rn_UpdateDisplay)",
+    "seconds": 0
+  },
+  {
+    "question": "How often does the wheel speed sensor run?",
+    "status": "answered",
+    "answer": "v1.1: SWC_WheelSpeedSensor runs Rn_ReadWheelSpeed every 5 ms.",
+    "citations": [
+      {
+        "n": 1,
+        "doc_id": "HLD_CruiseControl_v1.1",
+        "version": "1.1",
+        "section": "3 Software component descriptions > 3.1 SWC_WheelSpeedSensor",
+        "page": 2
+      }
+    ],
+    "confidence": "high",
+    "top_logit": null,
+    "evidence": [],
+    "version": "1.1",
+    "source": "database",
+    "route": "period",
+    "id": "S04",
+    "type": "answerable",
+    "expected": "Every 5 ms (Rn_ReadWheelSpeed)",
+    "seconds": 0
+  },
+  {
+    "question": "Which port of SWC_CruiseControl carries the throttle request, and what is its direction?",
+    "status": "answered",
+    "answer": "v1.0: SWC_CruiseControl has Rp_VehicleSpeed (required, If_VehicleSpeed, Sender-Receiver), Rp_BrakeStatus (required, If_BrakeStatus, Sender-Receiver), Pp_ThrottleRequest (provided, If_ThrottleRequest, Sender-Receiver).",
+    "citations": [
+      {
+        "n": 1,
+        "doc_id": "HLD_CruiseControl_v1.0",
+        "version": "1.0",
+        "section": "3 Software component descriptions > 3.3 SWC_CruiseControl",
+        "page": 3
+      }
+    ],
+    "confidence": "high",
+    "top_logit": null,
+    "evidence": [],
+    "version": "1.0",
+    "source": "database",
+    "route": "ports",
+    "id": "S05",
+    "type": "answerable",
+    "expected": "Pp_ThrottleRequest, a provided (P) port",
+    "seconds": 0
+  },
+  {
+    "question": "Which interface type does SWC_VehicleSpeedCalc use for the wheel speed input?",
+    "status": "answered",
+    "answer": "v1.0: SWC_VehicleSpeedCalc.Rp_WheelSpeed (If_WheelSpeed): interface type = Sender-Receiver",
+    "citations": [
+      {
+        "n": 1,
+        "doc_id": "HLD_CruiseControl_v1.0",
+        "version": "1.0",
+        "section": "3 Software component descriptions > 3.2 SWC_VehicleSpeedCalc",
+        "page": 2
+      }
+    ],
+    "confidence": "high",
+    "top_logit": null,
+    "evidence": [],
+    "version": "1.0",
+    "source": "database",
+    "route": "attr",
+    "id": "S06",
+    "type": "answerable",
+    "expected": "Sender-Receiver (port Rp_WheelSpeed)",
+    "seconds": 0
+  },
+  {
+    "question": "What are the inconsistencies in this design?",
+    "status": "answered",
+    "answer": "v1.0: 6 finding(s)\n   - data_type_mismatch @ If_VehicleSpeed.vehicleSpeed: If_VehicleSpeed.vehicleSpeed has different data types: SWC_VehicleSpeedCalc.Pp_VehicleSpeed=uint16; SWC_CruiseControl.Rp_VehicleSpeed=uint16; SWC_DisplayCluster.Rp_VehicleSpeed=uint8\n   - unit_mismatch @ If_VehicleSpeed.vehicleSpeed: If_VehicleSpeed.vehicleSpeed has different units: SWC_VehicleSpeedCalc.Pp_VehicleSpeed=km/h; SWC_CruiseControl.Rp_VehicleSpeed=km/h; SWC_DisplayCluster.Rp_VehicleSpeed=mph\n   - orphan_provider @ SWC_VehicleSpeedCalc.Pp_VehicleAccel: Provided port Pp_VehicleAccel (If_VehicleAccel) is not used by any required port\n   - missing_provider @ SWC_CruiseControl.Rp_BrakeStatus: Required port Rp_BrakeStatus uses If_BrakeStatus, but no component provides If_BrakeStatus\n   - interface_type_mismatch @ If_ThrottleRequest: If_ThrottleRequest is used with different interface types: SWC_CruiseControl.Pp_ThrottleRequest=Sender-Receiver; SWC_EngineControl.Rp_ThrottleRequest=Client-Server\n   - terminology_inconsistency @ SWC_VehSpeedCalc: \"SWC_VehSpeedCalc\" is not a defined component name (found in section \"3.3 SWC_CruiseControl\"); closest defined name: SWC_VehicleSpeedCalc",
+    "citations": [
+      {
+        "n": 1,
+        "doc_id": "HLD_CruiseControl_v1.0",
+        "version": "1.0",
+        "section": "Rule-based consistency check",
+        "page": 2
+      },
+      {
+        "n": 2,
+        "doc_id": "HLD_CruiseControl_v1.0",
+        "version": "1.0",
+        "section": "Rule-based consistency check",
+        "page": 3
+      }
+    ],
+    "confidence": "high",
+    "top_logit": null,
+    "evidence": [],
+    "version": "1.0",
+    "source": "database",
+    "route": "findings",
+    "id": "S07",
+    "type": "answerable",
+    "expected": "Six: data type and unit mismatch on If_VehicleSpeed, unused Pp_VehicleAccel, no provider for Rp_BrakeStatus, interface type mismatch on If_ThrottleRequest, and the name SWC_VehSpeedCalc",
+    "seconds": 0
+  },
+  {
+    "question": "Summarise the purpose of the SWC_CruiseControl component.",
+    "status": "answered",
+    "answer": "Holds the driver set speed by consuming vehicle speed and brake status, and requests throttle from the engine control.",
+    "citations": [
+      {
+        "n": 1,
+        "doc_id": "HLD_CruiseControl_v1.0",
+        "version": "1.0",
+        "section": "3 Software component descriptions > 3.3 SWC_CruiseControl",
+        "page": 3
+      },
+      {
+        "n": 2,
+        "doc_id": "HLD_CruiseControl_v1.0",
+        "version": "1.0",
+        "section": "3 Software component descriptions > 3.1 SWC_WheelSpeedSensor",
+        "page": 2
+      },
+      {
+        "n": 3,
+        "doc_id": "HLD_CruiseControl_v1.0",
+        "version": "1.0",
+        "section": "3 Software component descriptions > 3.4 SWC_EngineControl",
+        "page": 3
+      }
+    ],
+    "confidence": "high",
+    "top_logit": 3.192878007888794,
+    "evidence": [
+      "HLD_CruiseControl_v1.0::S008::C01",
+      "HLD_CruiseControl_v1.0::S006::C01",
+      "HLD_CruiseControl_v1.0::S009::C01"
+    ],
+    "version": "1.0",
+    "source": "llm",
+    "citation_check": "passed",
+    "id": "S08",
+    "type": "answerable",
+    "expected": "Holds the driver set speed: consumes vehicle speed and brake status and requests throttle from the engine control",
+    "seconds": 23
+  },
+  {
+    "question": "Which component reads the brake pedal switch?",
+    "status": "answered",
+    "answer": "SWC_BrakeManager",
+    "citations": [
+      {
+        "n": 1,
+        "doc_id": "HLD_CruiseControl_v1.1",
+        "version": "1.1",
+        "section": "3 Software component descriptions > 3.6 SWC_BrakeManager",
+        "page": 4
+      }
+    ],
+    "confidence": "high",
+    "top_logit": 7.685669422149658,
+    "evidence": [
+      "HLD_CruiseControl_v1.1::S011::C01",
+      "HLD_CruiseControl_v1.1::S008::C01",
+      "HLD_CruiseControl_v1.1::S006::C01"
+    ],
+    "version": "1.1",
+    "source": "llm",
+    "citation_check": "passed",
+    "id": "S09",
+    "type": "answerable",
+    "expected": "SWC_BrakeManager",
+    "seconds": 35
+  },
+  {
+    "question": "What is the colour of the vehicle?",
+    "status": "out_of_scope",
+    "answer": "This question is not covered by the approved HLD documents.",
+    "citations": [],
+    "confidence": "n/a",
+    "top_logit": -9.723491668701172,
+    "evidence": [
+      "HLD_CruiseControl_v1.0::S002::C01",
+      "HLD_CruiseControl_v1.0::S007::C01",
+      "HLD_CruiseControl_v1.0::S010::C01"
+    ],
+    "version": "1.0",
+    "source": "llm",
+    "id": "S10",
+    "type": "out_of_scope",
+    "expected": "The system should refuse as out of scope",
+    "seconds": 1
+  },
+  {
+    "question": "What is the data type of the brake status value?",
+    "status": "answered",
+    "answer": "v1.1: SWC_CruiseControl.Rp_BrakeStatus (If_BrakeStatus): data type = boolean\nv1.1: SWC_BrakeManager.Pp_BrakeStatus (If_BrakeStatus): data type = boolean",
+    "citations": [
+      {
+        "n": 1,
+        "doc_id": "HLD_CruiseControl_v1.1",
+        "version": "1.1",
+        "section": "3 Software component descriptions > 3.3 SWC_CruiseControl",
+        "page": 3
+      },
+      {
+        "n": 2,
+        "doc_id": "HLD_CruiseControl_v1.1",
+        "version": "1.1",
+        "section": "3 Software component descriptions > 3.6 SWC_BrakeManager",
+        "page": 4
+      }
+    ],
+    "confidence": "high",
+    "top_logit": null,
+    "evidence": [],
+    "version": "1.1",
+    "source": "database",
+    "route": "attr",
+    "id": "M01",
+    "type": "answerable",
+    "expected": "boolean (data element brakeActive, interface If_BrakeStatus)",
+    "seconds": 0
+  },
+  {
+    "question": "Which component sits between the wheel speed sensor and the cruise control in the speed signal chain?",
+    "status": "answered",
+    "answer": "SWC_VehicleSpeedCalc",
+    "citations": [
+      {
+        "n": 2,
+        "doc_id": "HLD_CruiseControl_v1.0",
+        "version": "1.0",
+        "section": "2 Architecture overview > 2.1 Component catalogue",
+        "page": 1
+      }
+    ],
+    "confidence": "medium",
+    "top_logit": 0.08952612429857254,
+    "evidence": [
+      "HLD_CruiseControl_v1.0::S006::C01",
+      "HLD_CruiseControl_v1.0::S004::C01",
+      "HLD_CruiseControl_v1.0::S008::C01"
+    ],
+    "version": "1.0",
+    "source": "llm",
+    "citation_check": "passed",
+    "id": "M02",
+    "type": "answerable",
+    "expected": "SWC_VehicleSpeedCalc: it reads the wheel speed from SWC_WheelSpeedSensor and provides the vehicle speed that SWC_CruiseControl consumes",
+    "seconds": 35
+  },
+  {
+    "question": "List all the ports of SWC_VehicleSpeedCalc.",
+    "status": "answered",
+    "answer": "v1.0: SWC_VehicleSpeedCalc has Pp_VehicleSpeed (provided, If_VehicleSpeed, Sender-Receiver), Pp_VehicleAccel (provided, If_VehicleAccel, Sender-Receiver), Rp_WheelSpeed (required, If_WheelSpeed, Sender-Receiver).",
+    "citations": [
+      {
+        "n": 1,
+        "doc_id": "HLD_CruiseControl_v1.0",
+        "version": "1.0",
+        "section": "3 Software component descriptions > 3.2 SWC_VehicleSpeedCalc",
+        "page": 2
+      }
+    ],
+    "confidence": "high",
+    "top_logit": null,
+    "evidence": [],
+    "version": "1.0",
+    "source": "database",
+    "route": "ports",
+    "id": "M03",
+    "type": "answerable",
+    "expected": "Rp_WheelSpeed (required, If_WheelSpeed), Pp_VehicleSpeed (provided, If_VehicleSpeed), Pp_VehicleAccel (provided, If_VehicleAccel)",
+    "seconds": 0
+  },
+  {
+    "question": "Which unit does the display cluster expect for speed, and does that agree with the speed provided by the calculator?",
+    "status": "answered",
+    "answer": "v1.0: SWC_DisplayCluster.Rp_VehicleSpeed (If_VehicleSpeed): unit = mph",
+    "citations": [
+      {
+        "n": 1,
+        "doc_id": "HLD_CruiseControl_v1.0",
+        "version": "1.0",
+        "section": "3 Software component descriptions > 3.5 SWC_DisplayCluster",
+        "page": 4
+      }
+    ],
+    "confidence": "high",
+    "top_logit": null,
+    "evidence": [],
+    "version": "1.0",
+    "source": "database",
+    "route": "attr",
+    "id": "M04",
+    "type": "answerable",
+    "expected": "SWC_DisplayCluster expects mph, but SWC_VehicleSpeedCalc provides km/h, so they do not agree (unit mismatch on If_VehicleSpeed)",
+    "seconds": 0
+  },
+  {
+    "question": "Which CAN message carries the wheel speed?",
+    "status": "unverified",
+    "answer": "Pp_WheelSpeed",
+    "citations": [
+      {
+        "n": 1,
+        "doc_id": "HLD_CruiseControl_v1.0",
+        "version": "1.0",
+        "section": "3 Software component descriptions > 3.1 SWC_WheelSpeedSensor",
+        "page": 2
+      }
+    ],
+    "confidence": "medium",
+    "top_logit": -1.2976787090301514,
+    "evidence": [
+      "HLD_CruiseControl_v1.0::S006::C01",
+      "HLD_CruiseControl_v1.0::S007::C01",
+      "HLD_CruiseControl_v1.0::S010::C01"
+    ],
+    "version": "1.0",
+    "source": "llm",
+    "citation_check": "failed",
+    "unsupported": [
+      "answer has no readable words"
+    ],
+    "id": "M05",
+    "type": "not_in_document",
+    "expected": "The document does not say; the system should say not found or refuse",
+    "seconds": 23
+  },
+  {
+    "question": "Which components changed their timing between the two versions?",
+    "status": "out_of_scope",
+    "answer": "This question is not covered by the approved HLD documents.",
+    "citations": [],
+    "confidence": "n/a",
+    "top_logit": -7.201252460479736,
+    "evidence": [
+      "HLD_CruiseControl_v1.1::S010::C01",
+      "HLD_CruiseControl_v1.1::S009::C01",
+      "HLD_CruiseControl_v1.1::S006::C01"
+    ],
+    "version": "1.1",
+    "source": "llm",
+    "id": "M06",
+    "type": "answerable",
+    "expected": "SWC_WheelSpeedSensor (10 ms to 5 ms) and SWC_CruiseControl (20 ms to 10 ms)",
+    "seconds": 1
+  }
+]

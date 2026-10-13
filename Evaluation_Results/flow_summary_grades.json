@@ -1,0 +1,17 @@
+{
+  "model": "qwen2.5:3b",
+  "graded_by": "grades proposed by the AI assistant (Claude); verified by the student against the FACTS lines and the PDF",
+  "grades": {
+    "v1.0 WheelSpeedSensor": 1,
+    "v1.0 VehicleSpeedCalc": 0,
+    "v1.0 CruiseControl": 0,
+    "v1.0 DisplayCluster": 0,
+    "v1.1 WheelSpeedSensor": 1,
+    "v1.1 VehicleSpeedCalc": 1,
+    "v1.1 CruiseControl": 1,
+    "v1.1 DisplayCluster": 1,
+    "v1.1 BrakeManager": 1
+  },
+  "llm_accurate": "6/9",
+  "note": "citation check passed all nine; it cannot detect swapped direction or invented links"
+}

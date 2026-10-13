@@ -1,0 +1,114 @@
+[
+  {
+    "id": "S01",
+    "version": "1.1",
+    "type": "answerable",
+    "q": "Which components use the brake status signal?",
+    "expected": "SWC_CruiseControl, through Rp_BrakeStatus"
+  },
+  {
+    "id": "S02",
+    "version": "1.0",
+    "type": "answerable",
+    "q": "Is there any component that supplies the vehicle acceleration?",
+    "expected": "Yes, SWC_VehicleSpeedCalc through Pp_VehicleAccel, but no component uses it"
+  },
+  {
+    "id": "S03",
+    "version": "1.0",
+    "type": "answerable",
+    "q": "What is the runnable period of the display cluster?",
+    "expected": "100 ms (Rn_UpdateDisplay)"
+  },
+  {
+    "id": "S04",
+    "version": "1.1",
+    "type": "answerable",
+    "q": "How often does the wheel speed sensor run?",
+    "expected": "Every 5 ms (Rn_ReadWheelSpeed)"
+  },
+  {
+    "id": "S05",
+    "version": "1.0",
+    "type": "answerable",
+    "q": "Which port of SWC_CruiseControl carries the throttle request, and what is its direction?",
+    "expected": "Pp_ThrottleRequest, a provided (P) port"
+  },
+  {
+    "id": "S06",
+    "version": "1.0",
+    "type": "answerable",
+    "q": "Which interface type does SWC_VehicleSpeedCalc use for the wheel speed input?",
+    "expected": "Sender-Receiver (port Rp_WheelSpeed)"
+  },
+  {
+    "id": "S07",
+    "version": "1.0",
+    "type": "answerable",
+    "q": "What are the inconsistencies in this design?",
+    "expected": "Six: data type and unit mismatch on If_VehicleSpeed, unused Pp_VehicleAccel, no provider for Rp_BrakeStatus, interface type mismatch on If_ThrottleRequest, and the name SWC_VehSpeedCalc"
+  },
+  {
+    "id": "S08",
+    "version": "1.0",
+    "type": "answerable",
+    "q": "Summarise the purpose of the SWC_CruiseControl component.",
+    "expected": "Holds the driver set speed: consumes vehicle speed and brake status and requests throttle from the engine control"
+  },
+  {
+    "id": "S09",
+    "version": "1.1",
+    "type": "answerable",
+    "q": "Which component reads the brake pedal switch?",
+    "expected": "SWC_BrakeManager"
+  },
+  {
+    "id": "S10",
+    "version": "1.0",
+    "type": "out_of_scope",
+    "q": "What is the colour of the vehicle?",
+    "expected": "The system should refuse as out of scope"
+  },
+  {
+    "id": "M01",
+    "version": "1.1",
+    "type": "answerable",
+    "q": "What is the data type of the brake status value?",
+    "expected": "boolean (data element brakeActive, interface If_BrakeStatus)"
+  },
+  {
+    "id": "M02",
+    "version": "1.0",
+    "type": "answerable",
+    "q": "Which component sits between the wheel speed sensor and the cruise control in the speed signal chain?",
+    "expected": "SWC_VehicleSpeedCalc: it reads the wheel speed from SWC_WheelSpeedSensor and provides the vehicle speed that SWC_CruiseControl consumes"
+  },
+  {
+    "id": "M03",
+    "version": "1.0",
+    "type": "answerable",
+    "q": "List all the ports of SWC_VehicleSpeedCalc.",
+    "expected": "Rp_WheelSpeed (required, If_WheelSpeed), Pp_VehicleSpeed (provided, If_VehicleSpeed), Pp_VehicleAccel (provided, If_VehicleAccel)"
+  },
+  {
+    "id": "M04",
+    "version": "1.0",
+    "type": "answerable",
+    "q": "Which unit does the display cluster expect for speed, and does that agree with the speed provided by the calculator?",
+    "expected": "SWC_DisplayCluster expects mph, but SWC_VehicleSpeedCalc provides km/h, so they do not agree (unit mismatch on If_VehicleSpeed)"
+  },
+  {
+    "id": "M05",
+    "version": "1.0",
+    "type": "not_in_document",
+    "q": "Which CAN message carries the wheel speed?",
+    "expected": "The document does not say; the system should say not found or refuse"
+  },
+  {
+    "id": "M06",
+    "version": "1.1",
+    "type": "answerable",
+    "q": "Which components changed their timing between the two versions?",
+    "expected": "SWC_WheelSpeedSensor (10 ms to 5 ms) and SWC_CruiseControl (20 ms to 10 ms)"
+  }
+]
